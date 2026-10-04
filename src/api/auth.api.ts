@@ -18,7 +18,7 @@ export function verifyAccount(payload: VerifyAccountPayload) {
 }
 
 export function getMe() {
-  return apiClient("/customers/my-profile");
+  return apiClient("/auth/me");
 }
 
 export function googleOAuth(payload: { idToken: string }) {

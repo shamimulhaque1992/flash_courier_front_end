@@ -24,7 +24,6 @@ const navLinks = [
 
 export default function Header() {
   const { data, isLoading } = useGetMe();
-  console.log(data, "data")
   const { mutate: logout } = useLogout();
   const queryClient = useQueryClient();
 
@@ -78,18 +77,37 @@ export default function Header() {
           )}
         </nav>
 
-        <div>
+        <div className="flex items-center gap-2">
           {!isLoading && !data && (
-            <Button
-              variant="outline"
-              render={<Link href="/login" />}
-              nativeButton={false}
-            >
-              Login
-            </Button>
+            <>
+              <Button
+                variant="outline"
+                size="sm"
+                render={<Link href="/apply/merchant" />}
+                nativeButton={false}
+              >
+                Apply as Merchant
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                render={<Link href="/apply/rider" />}
+                nativeButton={false}
+              >
+                Apply as Rider
+              </Button>
+              <Button
+                variant="default"
+                size="sm"
+                render={<Link href="/login" />}
+                nativeButton={false}
+              >
+                Login
+              </Button>
+            </>
           )}
           {!isLoading && data && (
-            <Button onClick={handleLogout} variant="destructive">
+            <Button onClick={handleLogout} variant="destructive" size="sm">
               Logout
             </Button>
           )}

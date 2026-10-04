@@ -12,4 +12,11 @@ export interface RegistrationPayload {
   name: string;
   email: string;
   password: string;
+  customer: {
+    contactNumber?: string;
+    thana?: string;
+    district?: string;
+    division: string;
+    address?: string;
+  };
 }
