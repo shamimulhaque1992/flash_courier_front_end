@@ -2,11 +2,10 @@ const prefix = "/merchant";
 
 export const merchantRoutes = [
   {
-    title: "Parcels",
+    title: "Shipments",
     items: [
       { title: "Overview", url: `${prefix}` },
-      { title: "My Parcels", url: `${prefix}/parcels` },
-      { title: "Create Parcel", url: `${prefix}/parcels/create` },
+      { title: "My Shipments", url: `${prefix}/shipments` },
     ],
   },
 ];

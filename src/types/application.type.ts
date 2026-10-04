@@ -1,6 +1,6 @@
 export type Division =
   | "DHAKA"
-  | "CHITTAGONG"
+  | "CHATTOGRAM"
   | "RAJSHAHI"
   | "KHULNA"
   | "BARISAL"

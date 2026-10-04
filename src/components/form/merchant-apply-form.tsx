@@ -41,7 +41,7 @@ type FormValues = z.infer<typeof merchantApplicationSchema>;
 
 const DIVISIONS = [
   "DHAKA",
-  "CHITTAGONG",
+  "CHATTOGRAM",
   "RAJSHAHI",
   "KHULNA",
   "BARISAL",
@@ -123,7 +123,8 @@ export default function MerchantApplyForm() {
           onError: (err) => {
             toast.add({
               title: "Application Failed",
-              description: err.message || "Something went wrong. Please try again",
+              description:
+                err.message || "Something went wrong. Please try again",
               type: "error",
             });
           },
@@ -154,7 +155,8 @@ export default function MerchantApplyForm() {
           <div className="grid gap-4 sm:grid-cols-2">
             <form.Field name="name">
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Full Name</FieldLabel>
@@ -173,7 +175,9 @@ export default function MerchantApplyForm() {
                         autoComplete="name"
                       />
                     </div>
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -181,7 +185,8 @@ export default function MerchantApplyForm() {
 
             <form.Field name="email">
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -200,7 +205,9 @@ export default function MerchantApplyForm() {
                         autoComplete="email"
                       />
                     </div>
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -208,7 +215,8 @@ export default function MerchantApplyForm() {
 
             <form.Field name="password">
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Password</FieldLabel>
@@ -230,10 +238,16 @@ export default function MerchantApplyForm() {
                         onClick={() => setShowPassword(!showPassword)}
                         className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                       >
-                        {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                        {showPassword ? (
+                          <EyeOff className="size-4" />
+                        ) : (
+                          <Eye className="size-4" />
+                        )}
                       </button>
                     </div>
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -241,10 +255,13 @@ export default function MerchantApplyForm() {
 
             <form.Field name="confirmPassword">
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>Confirm Password</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>
+                      Confirm Password
+                    </FieldLabel>
                     <div className="relative">
                       <Input
                         id={field.name}
@@ -260,13 +277,21 @@ export default function MerchantApplyForm() {
                       />
                       <button
                         type="button"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
                         className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                       >
-                        {showConfirmPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                        {showConfirmPassword ? (
+                          <EyeOff className="size-4" />
+                        ) : (
+                          <Eye className="size-4" />
+                        )}
                       </button>
                     </div>
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -277,7 +302,8 @@ export default function MerchantApplyForm() {
           <div className="grid gap-4 sm:grid-cols-2">
             <form.Field name="contactNumber">
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Contact Number</FieldLabel>
@@ -296,7 +322,9 @@ export default function MerchantApplyForm() {
                         autoComplete="tel"
                       />
                     </div>
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -304,7 +332,8 @@ export default function MerchantApplyForm() {
 
             <form.Field name="division">
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Division</FieldLabel>
@@ -313,7 +342,11 @@ export default function MerchantApplyForm() {
                       name={field.name}
                       value={field.state.value}
                       onBlur={field.handleBlur}
-                      onChange={(e) => field.handleChange(e.target.value as FormValues["division"])}
+                      onChange={(e) =>
+                        field.handleChange(
+                          e.target.value as FormValues["division"],
+                        )
+                      }
                       aria-invalid={isInvalid}
                       className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                     >
@@ -323,7 +356,9 @@ export default function MerchantApplyForm() {
                         </option>
                       ))}
                     </select>
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -331,7 +366,8 @@ export default function MerchantApplyForm() {
 
             <form.Field name="thana">
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Thana</FieldLabel>
@@ -345,7 +381,9 @@ export default function MerchantApplyForm() {
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
                     />
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -353,7 +391,8 @@ export default function MerchantApplyForm() {
 
             <form.Field name="district">
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>District</FieldLabel>
@@ -367,7 +406,9 @@ export default function MerchantApplyForm() {
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
                     />
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -376,7 +417,8 @@ export default function MerchantApplyForm() {
 
           <form.Field name="address">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor={field.name}>Business Address</FieldLabel>
@@ -404,10 +446,13 @@ export default function MerchantApplyForm() {
           <div className="grid gap-4 sm:grid-cols-2">
             <form.Field name="tradeLicenseNumber">
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>Trade License Number</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>
+                      Trade License Number
+                    </FieldLabel>
                     <Input
                       id={field.name}
                       name={field.name}
@@ -418,7 +463,9 @@ export default function MerchantApplyForm() {
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
                     />
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -426,10 +473,13 @@ export default function MerchantApplyForm() {
 
             <form.Field name="businessLicenseNumber">
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
-                    <FieldLabel htmlFor={field.name}>Business License Number</FieldLabel>
+                    <FieldLabel htmlFor={field.name}>
+                      Business License Number
+                    </FieldLabel>
                     <Input
                       id={field.name}
                       name={field.name}
@@ -440,7 +490,9 @@ export default function MerchantApplyForm() {
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
                     />
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -448,7 +500,8 @@ export default function MerchantApplyForm() {
 
             <form.Field name="businessType">
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>Business Type</FieldLabel>
@@ -462,7 +515,9 @@ export default function MerchantApplyForm() {
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
                     />
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
                   </Field>
                 );
               }}
@@ -471,10 +526,13 @@ export default function MerchantApplyForm() {
 
           <form.Field name="businessDescription">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               return (
                 <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor={field.name}>Business Description</FieldLabel>
+                  <FieldLabel htmlFor={field.name}>
+                    Business Description
+                  </FieldLabel>
                   <Textarea
                     id={field.name}
                     name={field.name}
@@ -494,11 +552,14 @@ export default function MerchantApplyForm() {
           {/* Documents */}
           <form.Field name="businessLicenseDocument">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               const file = field.state.value;
               return (
                 <Field data-invalid={isInvalid}>
-                  <FieldLabel htmlFor="bld-field">Business License Document</FieldLabel>
+                  <FieldLabel htmlFor="bld-field">
+                    Business License Document
+                  </FieldLabel>
                   <div className="flex flex-wrap items-center gap-3">
                     <Button
                       render={<label htmlFor="bld-field" />}
@@ -552,13 +613,16 @@ export default function MerchantApplyForm() {
 
           <form.Field name="additionalDocuments">
             {(field) => {
-              const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+              const isInvalid =
+                field.state.meta.isTouched && !field.state.meta.isValid;
               const files = field.state.value;
               return (
                 <Field data-invalid={isInvalid}>
                   <FieldLabel htmlFor="add-docs-field">
                     Additional Documents{" "}
-                    <span className="font-normal text-muted-foreground">(optional)</span>
+                    <span className="font-normal text-muted-foreground">
+                      (optional)
+                    </span>
                   </FieldLabel>
                   <div className="flex flex-wrap items-center gap-3">
                     <Button
@@ -606,7 +670,9 @@ export default function MerchantApplyForm() {
                             type="button"
                             aria-label={`Remove ${file.name}`}
                             onClick={() => {
-                              field.handleChange(files.filter((_, i) => i !== index));
+                              field.handleChange(
+                                files.filter((_, i) => i !== index),
+                              );
                               field.handleBlur();
                             }}
                             className="text-muted-foreground transition-colors hover:text-destructive"
@@ -639,11 +705,17 @@ export default function MerchantApplyForm() {
 
       <p className="text-xs text-muted-foreground text-center">
         Already approved?{" "}
-        <Link href="/login" className="font-medium underline underline-offset-4 hover:text-primary">
+        <Link
+          href="/login"
+          className="font-medium underline underline-offset-4 hover:text-primary"
+        >
           Sign in
         </Link>
         . Want to deliver instead?{" "}
-        <Link href="/apply/rider" className="font-medium underline underline-offset-4 hover:text-primary">
+        <Link
+          href="/apply/rider"
+          className="font-medium underline underline-offset-4 hover:text-primary"
+        >
           Apply as Rider
         </Link>
       </p>
