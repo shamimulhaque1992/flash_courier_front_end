@@ -5,8 +5,11 @@ import {
   createShipment,
   getAllShipments,
   getMyMerchantProfile,
+  getMyRiderShipments,
   getMyShipments,
+  markShipmentDelivered,
   repayShipment,
+  respondToShipment,
   updateShipmentStatus,
 } from "@/api";
 import type { ShipmentParams } from "@/types";
@@ -83,5 +86,32 @@ export function useGetMyMerchantProfile() {
   return useQuery({
     queryKey: ["my-merchant-profile"],
     queryFn: getMyMerchantProfile,
+  });
+}
+
+export function useSuspenseGetMyRiderShipments(params: ShipmentParams) {
+  return useSuspenseQuery({
+    queryKey: ["my-rider-shipments", params],
+    queryFn: () => getMyRiderShipments(params),
+  });
+}
+
+export function useRespondToShipment() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: respondToShipment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["my-rider-shipments"] });
+    },
+  });
+}
+
+export function useMarkShipmentDelivered() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: markShipmentDelivered,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["my-rider-shipments"] });
+    },
   });
 }

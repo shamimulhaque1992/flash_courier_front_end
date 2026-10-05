@@ -67,6 +67,32 @@ export function cancelShipment(shipmentId: string) {
   });
 }
 
+export function getMyRiderShipments(params: ShipmentParams) {
+  return apiClient<ApiResponse<Shipment[]>>("/shipments/my-assignments", { params });
+}
+
+export function respondToShipment(payload: {
+  shipmentId: string;
+  status: "ACCEPTED_BY_RIDER" | "REJECTED_BY_RIDER";
+}) {
+  const { shipmentId, status } = payload;
+  return apiClient<ApiResponse<Shipment>>(`/shipments/respond/${shipmentId}`, {
+    method: "PATCH",
+    body: { status },
+  });
+}
+
+export function markShipmentDelivered(payload: {
+  shipmentId: string;
+  otp: string;
+}) {
+  const { shipmentId, otp } = payload;
+  return apiClient<ApiResponse<{ message: string }>>(`/shipments/deliver/${shipmentId}`, {
+    method: "PATCH",
+    body: { otp },
+  });
+}
+
 export function getMyMerchantProfile() {
   return apiClient<ApiResponse<Merchant>>("/merchants/my-profile");
 }
