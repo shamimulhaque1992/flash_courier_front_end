@@ -3,6 +3,7 @@ import type {
   ApiResponse,
   CalculatePricePayload,
   CreateShipmentPayload,
+  Merchant,
   PricingResult,
   Shipment,
   ShipmentParams,
@@ -23,8 +24,32 @@ export function createShipment(payload: CreateShipmentPayload) {
 }
 
 export function getMyShipments(params: ShipmentParams) {
-  return apiClient<ApiResponse<Shipment[]>>("/shipments/my-shipments", {
-    params,
+  return apiClient<ApiResponse<Shipment[]>>("/shipments/my-shipments", { params });
+}
+
+export function getAllShipments(params: ShipmentParams) {
+  return apiClient<ApiResponse<Shipment[]>>("/shipments/all", { params });
+}
+
+export function updateShipmentStatus(payload: {
+  shipmentId: string;
+  status: string;
+  remarks?: string;
+}) {
+  const { shipmentId, ...body } = payload;
+  return apiClient<ApiResponse<Shipment>>(`/shipments/status/${shipmentId}`, {
+    method: "PATCH",
+    body,
+  });
+}
+
+export function assignShipment(payload: {
+  shipmentId: string;
+  scheduleId: string;
+}) {
+  return apiClient<ApiResponse<Shipment>>("/shipments/assign", {
+    method: "POST",
+    body: payload,
   });
 }
 
@@ -43,5 +68,5 @@ export function cancelShipment(shipmentId: string) {
 }
 
 export function getMyMerchantProfile() {
-  return apiClient<ApiResponse<import("@/types").Merchant>>("/merchants/my-profile");
+  return apiClient<ApiResponse<Merchant>>("/merchants/my-profile");
 }

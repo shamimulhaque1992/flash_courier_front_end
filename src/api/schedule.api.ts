@@ -4,6 +4,7 @@ import type {
   CreateRiderSchedulePayload,
   RiderSchedule,
   RiderScheduleParams,
+  RiderScheduleWithSlots,
   UpdateRiderSchedulePayload,
 } from "@/types";
 
@@ -18,6 +19,19 @@ export function getMyRiderSchedules(params: RiderScheduleParams) {
   return apiClient<ApiResponse<RiderSchedule[]>>(
     "/rider-schedules/my-schedules",
     { params },
+  );
+}
+
+export function getAllRiderSchedules(params: RiderScheduleParams) {
+  return apiClient<ApiResponse<RiderSchedule[]>>(
+    "/rider-schedules/all-schedules",
+    { params },
+  );
+}
+
+export function getScheduleSlots(scheduleId: string) {
+  return apiClient<ApiResponse<RiderScheduleWithSlots>>(
+    `/rider-schedules/${scheduleId}/slots`,
   );
 }
 

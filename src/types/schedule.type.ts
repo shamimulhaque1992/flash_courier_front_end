@@ -25,7 +25,28 @@ export interface RiderSchedule {
     name: string;
     email: string;
     division?: string;
+    district?: string;
+    vehicleType?: string;
   };
+}
+
+export interface ScheduleSlot {
+  slotIndex: number;
+  probableDeliveryTime: string;
+  shipment: {
+    id: string;
+    trackingNumber: string;
+    receiverName: string;
+    receiverDistrict: string;
+    receiverDivision: string;
+    shipmentStatus: string;
+    probableDeliveryTime: string | null;
+  } | null;
+}
+
+export interface RiderScheduleWithSlots extends RiderSchedule {
+  scheduleId: string;
+  slots: ScheduleSlot[];
 }
 
 export interface CreateRiderSchedulePayload {

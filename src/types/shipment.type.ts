@@ -51,6 +51,11 @@ export interface Shipment {
     refundTrxId?: string | null;
     refundAmount?: number | null;
   } | null;
+  merchant?: {
+    name: string;
+    email: string;
+    division?: Division;
+  } | null;
   rider?: {
     name: string;
     email: string;

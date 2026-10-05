@@ -74,6 +74,7 @@ export interface Rider {
 
 export interface RiderParams {
   verificationStatus?: RiderVerificationStatus;
+  division?: Division;
   page?: number;
   limit?: number;
   searchTerm?: string;

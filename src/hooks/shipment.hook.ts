@@ -1,10 +1,13 @@
 import {
+  assignShipment,
   calculateShipmentPrice,
   cancelShipment,
   createShipment,
+  getAllShipments,
   getMyMerchantProfile,
   getMyShipments,
   repayShipment,
+  updateShipmentStatus,
 } from "@/api";
 import type { ShipmentParams } from "@/types";
 import {
@@ -32,6 +35,33 @@ export function useSuspenseGetMyShipments(params: ShipmentParams) {
   return useSuspenseQuery({
     queryKey: ["my-shipments", params],
     queryFn: () => getMyShipments(params),
+  });
+}
+
+export function useSuspenseGetAllShipments(params: ShipmentParams) {
+  return useSuspenseQuery({
+    queryKey: ["all-shipments", params],
+    queryFn: () => getAllShipments(params),
+  });
+}
+
+export function useUpdateShipmentStatus() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updateShipmentStatus,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["all-shipments"] });
+    },
+  });
+}
+
+export function useAssignShipment() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: assignShipment,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["all-shipments"] });
+    },
   });
 }
 
