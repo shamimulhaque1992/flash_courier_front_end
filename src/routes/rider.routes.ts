@@ -8,4 +8,10 @@ export const riderRoutes = [
       { title: "My Deliveries", url: `${prefix}/deliveries` },
     ],
   },
+  {
+    title: "Schedule",
+    items: [
+      { title: "My Schedule", url: `${prefix}/my-schedule` },
+    ],
+  },
 ];
