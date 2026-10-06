@@ -55,6 +55,7 @@ export interface Shipment {
     name: string;
     email: string;
     division?: Division;
+    district?: string;
   } | null;
   rider?: {
     name: string;
@@ -66,12 +67,21 @@ export interface Shipment {
     startTime: string;
     endTime: string;
   } | null;
+  reviews?: Review | null;
 }
 
 export interface ShipmentHistory {
   status: ShipmentStatus;
   remarks?: string | null;
   updatedAt: string;
+}
+
+export interface Review {
+  id: string;
+  merchantRating: number;
+  riderRating: number;
+  comment?: string | null;
+  createdAt: string;
 }
 
 export interface TrackedShipment {
@@ -86,7 +96,7 @@ export interface TrackedShipment {
   shipmentHistory: ShipmentHistory[];
 }
 
-
+export interface ShipmentParams {
   page?: number;
   limit?: number;
   searchTerm?: string;

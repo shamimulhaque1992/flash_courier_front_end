@@ -8,6 +8,7 @@ import {
   getMyMerchantProfile,
   getMyRiderShipments,
   getMyShipments,
+  getSingleCustomerShipment,
   markShipmentDelivered,
   repayShipment,
   respondToShipment,
@@ -130,5 +131,13 @@ export function useSuspenseGetCustomerShipments(params: ShipmentParams) {
   return useSuspenseQuery({
     queryKey: ["customer-shipments", params],
     queryFn: () => getCustomerShipments(params),
+  });
+}
+
+export function useGetSingleCustomerShipment(shipmentId: string) {
+  return useQuery({
+    queryKey: ["customer-shipment", shipmentId],
+    queryFn: () => getSingleCustomerShipment(shipmentId),
+    enabled: !!shipmentId,
   });
 }

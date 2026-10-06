@@ -6,6 +6,7 @@ import type {
   Merchant,
   PricingResult,
   Shipment,
+  ShipmentHistory,
   ShipmentParams,
   TrackedShipment,
 } from "@/types";
@@ -77,6 +78,10 @@ export function trackShipmentPublic(trackingNumber: string) {
 
 export function getCustomerShipments(params: ShipmentParams) {
   return apiClient<ApiResponse<Shipment[]>>("/shipments/my-deliveries", { params });
+}
+
+export function getSingleCustomerShipment(shipmentId: string) {
+  return apiClient<ApiResponse<Shipment & { shipmentHistory: ShipmentHistory[] }>>(`/shipments/${shipmentId}`);
 }
 
 export function getMyRiderShipments(params: ShipmentParams) {

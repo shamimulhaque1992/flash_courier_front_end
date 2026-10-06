@@ -36,7 +36,10 @@ const STATUS_BADGE: Record<ShipmentStatus, string> = {
 };
 
 const formatStatus = (s: string) =>
-  s.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+  s
+    .replace(/_/g, " ")
+    .toLowerCase()
+    .replace(/\b\w/g, (c) => c.toUpperCase());
 
 export default function MyOrdersTable({ handlePageChange, ...params }: Props) {
   const { data } = useSuspenseGetCustomerShipments(params);
@@ -84,10 +87,9 @@ export default function MyOrdersTable({ handlePageChange, ...params }: Props) {
                   <TableCell className="font-mono text-xs font-medium">
                     {shipment.trackingNumber}
                   </TableCell>
-                  <TableCell className="text-sm">
-                    <span className="capitalize">
-                      {shipment.merchant?.division?.toLowerCase() ?? "—"}
-                    </span>
+                  <TableCell className="text-sm capitalize">
+                    {shipment.merchant?.district?.toLowerCase() ?? "—"} ,
+                    {shipment.merchant?.division?.toLowerCase() ?? "—"}
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground">
                     <div className="flex flex-col">
@@ -111,16 +113,29 @@ export default function MyOrdersTable({ handlePageChange, ...params }: Props) {
                     </span>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => {
-                        const params = new URLSearchParams({ q: shipment.trackingNumber });
-                        router.push(`/track?${params.toString()}`);
-                      }}
-                    >
-                      Track
-                    </Button>
+                    <div className="flex items-center justify-end gap-2">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() => {
+                          const p = new URLSearchParams({
+                            q: shipment.trackingNumber,
+                          });
+                          router.push(`/track?${p.toString()}`);
+                        }}
+                      >
+                        Track
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={() =>
+                          router.push(`/customer/orders/${shipment.id}`)
+                        }
+                      >
+                        View Details
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))
