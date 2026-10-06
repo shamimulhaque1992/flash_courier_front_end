@@ -68,7 +68,25 @@ export interface Shipment {
   } | null;
 }
 
-export interface ShipmentParams {
+export interface ShipmentHistory {
+  status: ShipmentStatus;
+  remarks?: string | null;
+  updatedAt: string;
+}
+
+export interface TrackedShipment {
+  trackingNumber: string;
+  shipmentStatus: ShipmentStatus;
+  receiverName: string;
+  receiverDistrict: string;
+  receiverDivision: string;
+  probableDeliveryTime?: string | null;
+  actualDeliveryTime?: string | null;
+  createdAt: string;
+  shipmentHistory: ShipmentHistory[];
+}
+
+
   page?: number;
   limit?: number;
   searchTerm?: string;

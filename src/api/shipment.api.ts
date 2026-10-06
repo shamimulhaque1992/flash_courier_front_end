@@ -7,6 +7,7 @@ import type {
   PricingResult,
   Shipment,
   ShipmentParams,
+  TrackedShipment,
 } from "@/types";
 
 export function calculateShipmentPrice(payload: CalculatePricePayload) {
@@ -65,6 +66,17 @@ export function cancelShipment(shipmentId: string) {
     method: "PATCH",
     body: { shipmentId },
   });
+}
+
+export function trackShipmentPublic(trackingNumber: string) {
+  return apiClient<ApiResponse<TrackedShipment>>("/shipments/track", {
+    method: "POST",
+    body: { trackingNumber },
+  });
+}
+
+export function getCustomerShipments(params: ShipmentParams) {
+  return apiClient<ApiResponse<Shipment[]>>("/shipments/my-deliveries", { params });
 }
 
 export function getMyRiderShipments(params: ShipmentParams) {

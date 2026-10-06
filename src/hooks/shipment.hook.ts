@@ -4,12 +4,14 @@ import {
   cancelShipment,
   createShipment,
   getAllShipments,
+  getCustomerShipments,
   getMyMerchantProfile,
   getMyRiderShipments,
   getMyShipments,
   markShipmentDelivered,
   repayShipment,
   respondToShipment,
+  trackShipmentPublic,
   updateShipmentStatus,
 } from "@/api";
 import type { ShipmentParams } from "@/types";
@@ -113,5 +115,20 @@ export function useMarkShipmentDelivered() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["my-rider-shipments"] });
     },
+  });
+}
+
+export function useTrackShipmentPublic(trackingNumber: string) {
+  return useQuery({
+    queryKey: ["track-shipment", trackingNumber],
+    queryFn: () => trackShipmentPublic(trackingNumber),
+    enabled: !!trackingNumber,
+  });
+}
+
+export function useSuspenseGetCustomerShipments(params: ShipmentParams) {
+  return useSuspenseQuery({
+    queryKey: ["customer-shipments", params],
+    queryFn: () => getCustomerShipments(params),
   });
 }

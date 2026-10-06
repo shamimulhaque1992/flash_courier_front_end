@@ -1,0 +1,77 @@
+"use client";
+
+import { type ChangeEvent, Suspense, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import useDebounce from "@/hooks/debounce.hook";
+import type { ShipmentParams, ShipmentStatus } from "@/types";
+import MyOrdersTableLoading from "./my-orders-table-loading";
+import MyOrdersTable from "./my-orders-table";
+
+type StatusTab = "ALL" | ShipmentStatus;
+
+const STATUS_TABS: [StatusTab, string][] = [
+  ["ALL", "All"],
+  ["ASSIGNED", "Assigned"],
+  ["ACCEPTED_BY_RIDER", "Accepted"],
+  ["PICKED_UP", "Picked Up"],
+  ["OUT_FOR_DELIVERY", "Out for Delivery"],
+  ["DELIVERED", "Delivered"],
+  ["CANCELLED_BY_MERCHANT", "Cancelled"],
+];
+
+export default function MyOrdersTabs() {
+  const [tab, setTab] = useState<StatusTab>("ALL");
+  const [searchInput, setSearchInput] = useState("");
+  const [page, setPage] = useState(1);
+
+  const debouncedSearch = useDebounce(searchInput);
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+    setPage(1);
+  };
+
+  const queryParams: ShipmentParams = {
+    page,
+    limit: 10,
+    ...(tab !== "ALL" ? { shipmentStatus: tab } : {}),
+    ...(debouncedSearch ? { searchTerm: debouncedSearch } : {}),
+  };
+
+  return (
+    <>
+      <div className="flex flex-col gap-4 my-5">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <Input
+            onChange={handleSearch}
+            type="search"
+            placeholder="Search by tracking # or district…"
+            className="sm:max-w-sm"
+          />
+        </div>
+        <div className="overflow-x-auto">
+          <Tabs
+            value={tab}
+            onValueChange={(v) => {
+              setTab(v as StatusTab);
+              setPage(1);
+            }}
+          >
+            <TabsList>
+              {STATUS_TABS.map(([value, label]) => (
+                <TabsTrigger key={value} value={value}>
+                  {label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+        </div>
+      </div>
+
+      <Suspense fallback={<MyOrdersTableLoading />}>
+        <MyOrdersTable {...queryParams} handlePageChange={setPage} />
+      </Suspense>
+    </>
+  );
+}
