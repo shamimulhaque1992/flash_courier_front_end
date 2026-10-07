@@ -27,7 +27,7 @@ import {
   useGetMyMerchantProfile,
 } from "@/hooks/shipment.hook";
 import { createShipmentSchema } from "@/validation";
-import type { PricingResult } from "@/types";
+import type { Division, PricingResult } from "@/types";
 import z from "zod";
 
 type FormValues = z.infer<typeof createShipmentSchema>;
@@ -67,7 +67,7 @@ export default function CreateShipmentDialog() {
   const { mutate: create, isPending: isCreating } = useCreateShipment();
   const { data: profileData } = useGetMyMerchantProfile();
 
-  const form = useForm<FormValues>({
+  const form = useForm({
     defaultValues,
     validators: { onSubmit: createShipmentSchema },
     onSubmit: async ({ value }) => {

@@ -57,10 +57,10 @@ export const customerRegistrationSchema = z
       .regex(/[^A-Za-z0-9]/, "Must contain at least 1 special character"),
     confirmPassword: z.string().min(1, "Please confirm your password"),
     division: z.enum(DIVISIONS, { error: "Please select a division" }),
-    contactNumber: z.string().optional(),
-    thana: z.string().optional(),
-    district: z.string().optional(),
-    address: z.string().optional(),
+    contactNumber: z.string(),
+    thana: z.string(),
+    district: z.string(),
+    address: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
@@ -158,8 +158,8 @@ export const riderApplicationSchema = z
     division: z.enum(DIVISIONS, { error: "Please select a division" }),
     address: z.string().trim().min(2, "Address is required"),
     vehicleType: z.string().trim().min(2, "Vehicle type is required"),
-    licenseNumber: z.string().trim().optional(),
-    vehicleRegistrationNumber: z.string().trim().optional(),
+    licenseNumber: z.string().trim(),
+    vehicleRegistrationNumber: z.string().trim(),
     nidDocument: getCustomFileSchema<File | null>(
       `NID document must be a PDF or image under ${MAX_FILE_SIZE}MB`,
     ).refine((value) => value instanceof File, {

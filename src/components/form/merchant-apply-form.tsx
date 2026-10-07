@@ -31,7 +31,7 @@ import {
   MAX_ADDITIONAL_FILES,
 } from "@/validation";
 import { formatFileSize } from "@/utils";
-import type { MerchantApplicationData } from "@/types";
+import type { Division, MerchantApplicationData } from "@/types";
 import { useApplyAsMerchant } from "@/hooks";
 import { toast } from "@/components/ui/toast";
 import { Spinner } from "@/components/ui/spinner";
@@ -56,7 +56,7 @@ export default function MerchantApplyForm() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { mutate: apply, isPending } = useApplyAsMerchant();
 
-  const form = useForm<FormValues>({
+  const form = useForm({
     defaultValues: {
       name: "",
       email: "",
@@ -87,7 +87,7 @@ export default function MerchantApplyForm() {
           contactNumber: value.contactNumber.trim(),
           thana: value.thana.trim(),
           district: value.district.trim(),
-          division: value.division,
+          division: value.division.trim() as Division,
           address: value.address.trim(),
           tradeLicenseNumber: value.tradeLicenseNumber.trim(),
           businessLicenseNumber: value.businessLicenseNumber.trim(),

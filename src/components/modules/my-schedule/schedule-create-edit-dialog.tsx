@@ -55,7 +55,7 @@ export default function ScheduleCreateEditDialog({
 
   const form = useForm({
     defaultValues: {
-      dayOfWeek: editSchedule?.dayOfWeek ?? ("" as DayOfWeek | ""),
+      dayOfWeek: (editSchedule?.dayOfWeek ?? "") as string,
       startTime: editSchedule?.startTime ?? "",
       endTime: editSchedule?.endTime ?? "",
     },

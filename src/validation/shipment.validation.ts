@@ -21,12 +21,12 @@ export const createShipmentSchema = z.object({
   receiverThana: z.string().trim().min(2, "Thana is required"),
   receiverDistrict: z.string().trim().min(2, "District is required"),
   receiverDivision: z.enum(DIVISIONS, { error: "Please select a division" }),
-  receiverAddress: z.string().trim().optional(),
-  packageDescription: z.string().trim().optional(),
+  receiverAddress: z.string().trim(),
+  packageDescription: z.string().trim(),
   packageWeight: z
     .number({ error: "Package weight is required" })
     .positive("Weight must be greater than 0"),
-  packageDimensions: z.string().trim().optional(),
-  isFragile: z.boolean().optional().default(false),
-  note: z.string().trim().optional(),
+  packageDimensions: z.string().trim(),
+  isFragile: z.boolean(),
+  note: z.string().trim(),
 });

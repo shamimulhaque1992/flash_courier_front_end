@@ -92,7 +92,7 @@ export default function ShipmentDetailView({
   const hasReview = !!shipment.reviews;
 
   return (
-    <div className="mx-auto space-y-6 py-8">
+    <div className="mx-auto max-w-4xl space-y-6 py-8">
       <div className="flex items-center justify-between">
         <Button
           variant="ghost"

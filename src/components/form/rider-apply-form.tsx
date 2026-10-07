@@ -30,7 +30,7 @@ import {
   MAX_ADDITIONAL_FILES,
 } from "@/validation";
 import { formatFileSize } from "@/utils";
-import type { RiderApplicationData } from "@/types";
+import type { Division, RiderApplicationData } from "@/types";
 import { useApplyAsRider } from "@/hooks";
 import { toast } from "@/components/ui/toast";
 import { Spinner } from "@/components/ui/spinner";
@@ -55,7 +55,7 @@ export default function RiderApplyForm() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { mutate: apply, isPending } = useApplyAsRider();
 
-  const form = useForm<FormValues>({
+  const form = useForm({
     defaultValues: {
       name: "",
       email: "",
@@ -87,12 +87,12 @@ export default function RiderApplyForm() {
           nidNumber: value.nidNumber.trim(),
           thana: value.thana.trim(),
           district: value.district.trim(),
-          division: value.division,
+          division: value.division as Division,
           address: value.address.trim(),
           vehicleType: value.vehicleType.trim(),
-          licenseNumber: value.licenseNumber?.trim() || undefined,
+          licenseNumber: value.licenseNumber.trim() || undefined,
           vehicleRegistrationNumber:
-            value.vehicleRegistrationNumber?.trim() || undefined,
+            value.vehicleRegistrationNumber.trim() || undefined,
         },
       };
 

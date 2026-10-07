@@ -129,9 +129,10 @@ export default function MyOrdersTable({ handlePageChange, ...params }: Props) {
                       <Button
                         size="sm"
                         variant="outline"
-                        onClick={() =>
-                          router.push(`/customer/orders/${shipment.id}`)
-                        }
+                        onClick={() => {
+                          const p = new URLSearchParams({ id: shipment.id });
+                          router.push(`/customer/orders?${p.toString()}`);
+                        }}
                       >
                         View Details
                       </Button>

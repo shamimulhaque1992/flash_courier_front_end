@@ -29,6 +29,7 @@ export const riderScheduleSchema = z
 
 export const updateRiderScheduleSchema = z
   .object({
+    dayOfWeek: z.string(),
     startTime: z.string().min(1, "Start time is required"),
     endTime: z.string().min(1, "End time is required"),
   })

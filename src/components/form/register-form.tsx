@@ -19,7 +19,7 @@ import { customerRegistrationSchema } from "@/validation";
 import { useRegistration } from "@/hooks";
 import { toast } from "../ui/toast";
 import { Spinner } from "../ui/spinner";
-import type { CustomerRegistrationPayload } from "@/types";
+import type { CustomerRegistrationPayload, Division } from "@/types";
 import z from "zod";
 
 type FormValues = z.infer<typeof customerRegistrationSchema>;
@@ -42,7 +42,7 @@ export default function RegisterForm() {
 
   const { mutate: registration, isPending } = useRegistration();
 
-  const form = useForm<FormValues>({
+  const form = useForm({
     defaultValues: {
       name: "",
       email: "",
@@ -61,11 +61,11 @@ export default function RegisterForm() {
         email: value.email.trim(),
         password: value.password,
         customer: {
-          division: value.division,
-          contactNumber: value.contactNumber || undefined,
-          thana: value.thana || undefined,
-          district: value.district || undefined,
-          address: value.address || undefined,
+          division: value.division as Division,
+          contactNumber: value.contactNumber.trim() || undefined,
+          thana: value.thana.trim() || undefined,
+          district: value.district.trim() || undefined,
+          address: value.address.trim() || undefined,
         },
       };
 
