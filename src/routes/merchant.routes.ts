@@ -6,6 +6,7 @@ export const merchantRoutes = [
     items: [
       { title: "Overview", url: `${prefix}` },
       { title: "My Shipments", url: `${prefix}/shipments` },
+      { title: "My Profile", url: `${prefix}/my-profile` },
     ],
   },
 ];

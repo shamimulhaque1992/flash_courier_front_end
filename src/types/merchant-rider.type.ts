@@ -4,6 +4,22 @@ import type { Division } from "./application.type";
 export type MerchantVerificationStatus = "PENDING" | "VERIFIED" | "REJECTED";
 export type RiderVerificationStatus = "PENDING" | "VERIFIED" | "REJECTED";
 
+export interface Customer {
+  id: string;
+  name: string;
+  email: string;
+  contactNumber?: string | null;
+  thana?: string | null;
+  district?: string | null;
+  division?: Division | null;
+  address?: string | null;
+  isDeleted: boolean;
+  createdAt: string;
+  updatedAt: string;
+  userId: string;
+  user: User;
+}
+
 export interface Merchant {
   id: string;
   name: string;

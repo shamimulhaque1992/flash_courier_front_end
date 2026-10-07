@@ -3,8 +3,10 @@ import type {
   ApiResponse,
   CalculatePricePayload,
   CreateShipmentPayload,
+  Customer,
   Merchant,
   PricingResult,
+  Rider,
   Shipment,
   ShipmentHistory,
   ShipmentParams,
@@ -112,4 +114,12 @@ export function markShipmentDelivered(payload: {
 
 export function getMyMerchantProfile() {
   return apiClient<ApiResponse<Merchant>>("/merchants/my-profile");
+}
+
+export function getMyRiderProfile() {
+  return apiClient<ApiResponse<Rider>>("/riders/my-profile");
+}
+
+export function getMyCustomerProfile() {
+  return apiClient<ApiResponse<Customer>>("/customers/my-profile");
 }

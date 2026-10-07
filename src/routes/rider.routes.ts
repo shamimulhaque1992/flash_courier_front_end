@@ -6,6 +6,7 @@ export const riderRoutes = [
     items: [
       { title: "Overview", url: `${prefix}` },
       { title: "My Deliveries", url: `${prefix}/deliveries` },
+      { title: "My Profile", url: `${prefix}/my-profile` },
     ],
   },
   {

@@ -3,6 +3,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -22,7 +23,9 @@ import {
   customerRoutes,
 } from "@/routes";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useGetMe, useLogout } from "@/hooks";
+import { LogOut } from "lucide-react";
 
 const sidebarRoutes: Partial<Record<UserRole, SidebarItems>> = {
   SUPER_ADMIN: superAdminRoutes,
@@ -34,7 +37,19 @@ const sidebarRoutes: Partial<Record<UserRole, SidebarItems>> = {
 
 export function DashboardSidebar({ role }: { role: UserRole }) {
   const pathname = usePathname();
+  const router = useRouter();
   const routes: SidebarItems = sidebarRoutes[role] || [];
+
+  const { data: me } = useGetMe();
+  const { mutate: logout, isPending } = useLogout();
+
+  const user = (me as { data?: { name?: string; email?: string } })?.data;
+
+  function handleLogout() {
+    logout(undefined, {
+      onSuccess: () => router.push("/login"),
+    });
+  }
 
   return (
     <Sidebar>
@@ -67,6 +82,26 @@ export function DashboardSidebar({ role }: { role: UserRole }) {
           </SidebarGroup>
         ))}
       </SidebarContent>
+      <SidebarFooter>
+        <div className="flex items-center gap-3 rounded-md px-2 py-2">
+          <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-sidebar-accent text-sm font-semibold uppercase text-sidebar-accent-foreground">
+            {user?.name?.[0] ?? "?"}
+          </div>
+          <div className="min-w-0 flex-1 group-data-[collapsible=icon]:hidden">
+            <p className="truncate text-sm font-medium">{user?.name ?? "—"}</p>
+            <p className="truncate text-xs text-muted-foreground">{user?.email ?? "—"}</p>
+          </div>
+          <button
+            type="button"
+            onClick={handleLogout}
+            disabled={isPending}
+            className="shrink-0 rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground disabled:opacity-50 group-data-[collapsible=icon]:hidden"
+            title="Logout"
+          >
+            <LogOut className="size-4" />
+          </button>
+        </div>
+      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );
