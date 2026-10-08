@@ -1,13 +1,28 @@
+"use client";
+
 import Link from "next/link";
 import { CheckCircle2, XCircle, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
-interface Props {
-  searchParams: Promise<{ status?: string }>;
+function PaymentCallbackSkeleton() {
+  return (
+    <div className="flex min-h-screen items-center justify-center p-6">
+      <div className="flex max-w-md flex-col items-center gap-6 w-full">
+        <Skeleton className="size-24 rounded-full" />
+        <Skeleton className="h-8 w-48" />
+        <Skeleton className="h-16 w-full" />
+        <Skeleton className="h-10 w-36" />
+      </div>
+    </div>
+  );
 }
 
-export default async function ShipmentPaymentCallbackPage({ searchParams }: Props) {
-  const { status } = await searchParams;
+function PaymentCallbackContent() {
+  const searchParams = useSearchParams();
+  const status = searchParams.get("status");
 
   const isSuccess = status === "success";
   const isCancelled = status === "cancel" || status === "failure";
@@ -64,5 +79,13 @@ export default async function ShipmentPaymentCallbackPage({ searchParams }: Prop
         </Button>
       </div>
     </div>
+  );
+}
+
+export default function ShipmentPaymentCallbackPage() {
+  return (
+    <Suspense fallback={<PaymentCallbackSkeleton />}>
+      <PaymentCallbackContent />
+    </Suspense>
   );
 }
