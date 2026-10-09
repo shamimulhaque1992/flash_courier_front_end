@@ -1,15 +1,13 @@
 "use client";
 
-import { toast } from "@/components/ui/toast";
-import { useGoogleOAuth } from "@/hooks";
 import { GoogleLogin } from "@react-oauth/google";
 import { useRouter } from "next/navigation";
-import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "@/components/ui/toast";
+import { useGoogleOAuth } from "@/hooks";
 
 export default function GoogleLoginComponent() {
   const router = useRouter();
   const { mutate: googleLogin } = useGoogleOAuth();
-  const queryClient = useQueryClient();
 
   const handleGoogleSuccess = (credentialResponse: { credential?: string }) => {
     const idToken = credentialResponse.credential;
@@ -32,8 +30,7 @@ export default function GoogleLoginComponent() {
             description: "Welcome back",
             type: "success",
           });
-          queryClient.invalidateQueries({ queryKey: ["user"] });
-          router.push("/");
+          router.replace("/");
         },
         onError: (err) => {
           toast.add({

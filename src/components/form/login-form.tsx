@@ -1,7 +1,13 @@
 "use client";
 
 import { useForm } from "@tanstack/react-form";
-import { Input } from "../ui/input";
+import { Eye, EyeClosed } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useLogin } from "@/hooks";
+import { loginSchema } from "@/validation";
+import GoogleLoginComponent from "../modules/google-login/GoogleLogin";
 import { Button } from "../ui/button";
 import {
   Field,
@@ -10,23 +16,15 @@ import {
   FieldLabel,
   FieldSeparator,
 } from "../ui/field";
-import { loginSchema } from "@/validation";
-import { useState } from "react";
-import { Eye, EyeClosed } from "lucide-react";
-import { useLogin } from "@/hooks";
-import { useRouter } from "next/navigation";
-import { toast } from "../ui/toast";
+import { Input } from "../ui/input";
 import { Spinner } from "../ui/spinner";
-import Link from "next/link";
-import GoogleLoginComponent from "../modules/google-login/GoogleLogin";
-import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "../ui/toast";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
   const { mutate: login, isPending: loginPending } = useLogin();
-  const queryClient = useQueryClient();
 
   const form = useForm({
     defaultValues: {
@@ -46,13 +44,13 @@ export default function LoginForm() {
               description: "Welcome back",
               type: "success",
             });
-            queryClient.invalidateQueries({ queryKey: ["user"] });
             router.push("/");
           },
           onError: (err) => {
             toast.add({
               title: "Login Failed",
-              description: err.message || "Something went wrong. Please try again",
+              description:
+                err.message || "Something went wrong. Please try again",
               type: "error",
             });
           },

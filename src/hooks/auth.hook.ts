@@ -1,4 +1,10 @@
 import {
+  type QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
+import {
   getMe,
   googleOAuth,
   userLogin,
@@ -6,11 +12,17 @@ import {
   userRegistration,
   verifyAccount,
 } from "@/api";
-import { useMutation, useQuery } from "@tanstack/react-query";
+
+async function refreshUserQuery(queryClient: QueryClient) {
+  await queryClient.cancelQueries({ queryKey: ["user"] });
+  await queryClient.invalidateQueries({ queryKey: ["user"] });
+}
 
 export function useLogin() {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: userLogin,
+    onSuccess: () => refreshUserQuery(queryClient),
   });
 }
 
@@ -33,15 +45,17 @@ export function useVerifyAccount() {
 }
 
 export function useGoogleOAuth() {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: googleOAuth,
+    onSuccess: () => refreshUserQuery(queryClient),
   });
 }
 
 export function useGetMe() {
   return useQuery({
     queryKey: ["user"],
-    queryFn: getMe,
+    queryFn: ({ signal }) => getMe(signal),
     retry: false,
   });
 }
