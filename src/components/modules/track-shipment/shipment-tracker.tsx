@@ -31,14 +31,18 @@ const STATUS_BADGE: Record<ShipmentStatus, string> = {
   ASSIGNED: "bg-indigo-100 text-indigo-800",
   ACCEPTED_BY_RIDER: "bg-cyan-100 text-cyan-800",
   REJECTED_BY_RIDER: "bg-red-100 text-red-800",
-  PICKED_UP: "bg-orange-100 text-orange-800",
+  PICKED_UP: "bg-[#007595]/10 text-[#007595]",
   IN_TRANSIT: "bg-sky-100 text-sky-800",
   OUT_FOR_DELIVERY: "bg-teal-100 text-teal-800",
   DELIVERED: "bg-green-100 text-green-800",
   CANCELLED_BY_MERCHANT: "bg-gray-100 text-gray-600",
 };
 
-export default function ShipmentTracker({ shipment }: { shipment: TrackedShipment }) {
+export default function ShipmentTracker({
+  shipment,
+}: {
+  shipment: TrackedShipment;
+}) {
   const isDelivered = shipment.shipmentStatus === "DELIVERED";
   const isCancelled = shipment.shipmentStatus === "CANCELLED_BY_MERCHANT";
 
@@ -138,11 +142,16 @@ export default function ShipmentTracker({ shipment }: { shipment: TrackedShipmen
                       )}
                     </span>
                     <div className="flex flex-col gap-0.5">
-                      <p className={`font-medium text-sm ${isFirst ? "" : "text-muted-foreground"}`}>
-                        {STATUS_LABELS[entry.status as ShipmentStatus] ?? entry.status}
+                      <p
+                        className={`font-medium text-sm ${isFirst ? "" : "text-muted-foreground"}`}
+                      >
+                        {STATUS_LABELS[entry.status as ShipmentStatus] ??
+                          entry.status}
                       </p>
                       {entry.remarks && (
-                        <p className="text-xs text-muted-foreground">{entry.remarks}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {entry.remarks}
+                        </p>
                       )}
                       <time className="text-xs text-muted-foreground">
                         {format(new Date(entry.updatedAt), "PPp")}

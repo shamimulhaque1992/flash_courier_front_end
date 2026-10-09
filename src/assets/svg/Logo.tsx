@@ -6,6 +6,7 @@ export default function Logo() {
       height="36"
       viewBox="0 0 36 36"
       fill="none"
+      aria-hidden="true"
     >
       <rect width="36" height="36" rx="8" fill="url(#fc_grad)" />
       <path
@@ -13,10 +14,7 @@ export default function Logo() {
         fill="white"
         fillOpacity="0.9"
       />
-      <path
-        d="M14 18L18 14L22 18L18 22L14 18Z"
-        fill="url(#fc_grad)"
-      />
+      <path d="M14 18L18 14L22 18L18 22L14 18Z" fill="url(#fc_grad)" />
       <defs>
         <linearGradient
           id="fc_grad"
@@ -26,8 +24,8 @@ export default function Logo() {
           y2="36"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#F97316" />
-          <stop offset="1" stopColor="#EF4444" />
+          <stop stopColor="#007595" />
+          <stop offset="1" stopColor="#007595" />
         </linearGradient>
       </defs>
     </svg>

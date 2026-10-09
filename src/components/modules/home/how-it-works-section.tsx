@@ -45,7 +45,7 @@ export default function HowItWorksSection() {
           {steps.map(({ icon: Icon, step, title, description }) => (
             <div key={step} className="relative flex flex-col items-start gap-4">
               <div className="flex items-center gap-3">
-                <span className="text-4xl font-black text-primary/15 leading-none">
+                <span className="text-4xl font-black text-primary/70 leading-none">
                   {step}
                 </span>
                 <span className="inline-flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow">

@@ -31,7 +31,7 @@ const shipmentStatusBadge: Record<ShipmentStatus, string> = {
   ASSIGNED: "bg-indigo-100 text-indigo-800",
   ACCEPTED_BY_RIDER: "bg-cyan-100 text-cyan-800",
   REJECTED_BY_RIDER: "bg-red-100 text-red-800",
-  PICKED_UP: "bg-orange-100 text-orange-800",
+  PICKED_UP: "bg-[#007595]/10 text-[#007595]",
   IN_TRANSIT: "bg-sky-100 text-sky-800",
   OUT_FOR_DELIVERY: "bg-teal-100 text-teal-800",
   DELIVERED: "bg-green-100 text-green-800",
@@ -39,7 +39,10 @@ const shipmentStatusBadge: Record<ShipmentStatus, string> = {
 };
 
 const formatStatus = (s: string) =>
-  s.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+  s
+    .replace(/_/g, " ")
+    .toLowerCase()
+    .replace(/\b\w/g, (c) => c.toUpperCase());
 
 function ShipmentActionCell({
   shipment,
@@ -61,7 +64,12 @@ function ShipmentActionCell({
   // Inter-division: PAID → Mark In Transit button
   if (status === "PAID" && isInterDivision) {
     return (
-      <Button size="sm" variant="outline" disabled={isPending} onClick={() => onStatusUpdate(shipment.id, "IN_TRANSIT")}>
+      <Button
+        size="sm"
+        variant="outline"
+        disabled={isPending}
+        onClick={() => onStatusUpdate(shipment.id, "IN_TRANSIT")}
+      >
         Mark In Transit
       </Button>
     );
@@ -79,7 +87,12 @@ function ShipmentActionCell({
   // Inter-division: IN_TRANSIT → Ready for Assignment button
   if (status === "IN_TRANSIT") {
     return (
-      <Button size="sm" variant="outline" disabled={isPending} onClick={() => onStatusUpdate(shipment.id, "READY_FOR_ASSIGNMENT")}>
+      <Button
+        size="sm"
+        variant="outline"
+        disabled={isPending}
+        onClick={() => onStatusUpdate(shipment.id, "READY_FOR_ASSIGNMENT")}
+      >
         Ready for Assignment
       </Button>
     );
@@ -106,7 +119,12 @@ function ShipmentActionCell({
   // ACCEPTED_BY_RIDER → Mark Picked Up
   if (status === "ACCEPTED_BY_RIDER") {
     return (
-      <Button size="sm" variant="outline" disabled={isPending} onClick={() => onStatusUpdate(shipment.id, "PICKED_UP")}>
+      <Button
+        size="sm"
+        variant="outline"
+        disabled={isPending}
+        onClick={() => onStatusUpdate(shipment.id, "PICKED_UP")}
+      >
         Mark Picked Up
       </Button>
     );
@@ -115,7 +133,12 @@ function ShipmentActionCell({
   // PICKED_UP → Mark Out for Delivery
   if (status === "PICKED_UP") {
     return (
-      <Button size="sm" variant="outline" disabled={isPending} onClick={() => onStatusUpdate(shipment.id, "OUT_FOR_DELIVERY")}>
+      <Button
+        size="sm"
+        variant="outline"
+        disabled={isPending}
+        onClick={() => onStatusUpdate(shipment.id, "OUT_FOR_DELIVERY")}
+      >
         Out for Delivery
       </Button>
     );
@@ -198,8 +221,12 @@ export default function AdminShipmentsTable({
                   </TableCell>
                   <TableCell>
                     <div className="flex flex-col">
-                      <span className="font-medium">{shipment.merchant?.name ?? "—"}</span>
-                      <span className="text-xs text-muted-foreground">{shipment.merchant?.email ?? ""}</span>
+                      <span className="font-medium">
+                        {shipment.merchant?.name ?? "—"}
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        {shipment.merchant?.email ?? ""}
+                      </span>
                       {shipment.merchant?.division && (
                         <span className="text-xs text-muted-foreground capitalize">
                           {shipment.merchant.division.toLowerCase()}
@@ -209,15 +236,19 @@ export default function AdminShipmentsTable({
                   </TableCell>
                   <TableCell>
                     <div className="flex flex-col">
-                      <span className="font-medium">{shipment.receiverName}</span>
-                      <span className="text-xs text-muted-foreground">{shipment.receiverEmail}</span>
+                      <span className="font-medium">
+                        {shipment.receiverName}
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        {shipment.receiverEmail}
+                      </span>
                       <span className="text-xs text-muted-foreground capitalize">
-                        {shipment.receiverDistrict}, {shipment.receiverDivision.toLowerCase()}
+                        {shipment.receiverDistrict},{" "}
+                        {shipment.receiverDivision.toLowerCase()}
                       </span>
                     </div>
                   </TableCell>
                   <TableCell className="text-muted-foreground text-sm">
-                    
                     <span className="capitalize">
                       {shipment.merchant?.division?.toLowerCase()}
                     </span>
@@ -230,12 +261,14 @@ export default function AdminShipmentsTable({
                     {shipment.merchant?.division ? (
                       <span
                         className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${
-                          shipment.merchant.division !== shipment.receiverDivision
-                            ? "bg-orange-100 text-orange-800"
+                          shipment.merchant.division !==
+                          shipment.receiverDivision
+                            ? "bg-[#007595]/10 text-[#007595]"
                             : "bg-green-100 text-green-800"
                         }`}
                       >
-                        {shipment.merchant.division !== shipment.receiverDivision
+                        {shipment.merchant.division !==
+                        shipment.receiverDivision
                           ? "Inter Division"
                           : "Intra Division"}
                       </span>

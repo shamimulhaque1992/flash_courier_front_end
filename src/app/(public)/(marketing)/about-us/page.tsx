@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Clock,
   Globe,
@@ -9,6 +8,7 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 
 const values = [
   {
@@ -56,21 +56,40 @@ const team = [
 ];
 
 const milestones = [
-  { year: "2022", event: "Flash Courier founded with a vision to modernise last-mile delivery in Bangladesh." },
-  { year: "2023", event: "Expanded to all 8 divisions. Onboarded 200+ verified merchants and 300+ riders." },
-  { year: "2024", event: "Launched real-time tracking, bKash payment integration, and automated refunds." },
-  { year: "2025", event: "Serving 64 districts with 500+ active riders and thousands of daily shipments." },
+  {
+    year: "2022",
+    event:
+      "Flash Courier founded with a vision to modernise last-mile delivery in Bangladesh.",
+  },
+  {
+    year: "2023",
+    event:
+      "Expanded to all 8 divisions. Onboarded 200+ verified merchants and 300+ riders.",
+  },
+  {
+    year: "2024",
+    event:
+      "Launched real-time tracking, bKash payment integration, and automated refunds.",
+  },
+  {
+    year: "2025",
+    event:
+      "Serving 64 districts with 500+ active riders and thousands of daily shipments.",
+  },
 ];
 
 export default function AboutUsPage() {
   return (
     <div className="space-y-0">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-orange-500 to-red-500 py-24 px-4 text-white text-center">
+      <section className="bg-[#007595] py-24 px-4 text-white text-center">
         <div className="mx-auto max-w-3xl space-y-4">
-          <h1 className="text-4xl font-black sm:text-5xl">About Flash Courier</h1>
+          <h1 className="text-4xl font-black sm:text-5xl">
+            About Flash Courier
+          </h1>
           <p className="text-lg opacity-90 max-w-xl mx-auto">
-            Bangladesh's fastest-growing courier and logistics platform — connecting merchants, riders, and customers through technology.
+            Bangladesh's fastest-growing courier and logistics platform —
+            connecting merchants, riders, and customers through technology.
           </p>
         </div>
       </section>
@@ -84,10 +103,16 @@ export default function AboutUsPage() {
             </span>
             <h2 className="text-3xl font-bold">Delivering more than parcels</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Flash Courier was built to solve a simple problem: last-mile delivery in Bangladesh is slow, opaque, and unreliable. We set out to change that by building a platform where merchants can ship with confidence, riders can earn fairly, and customers always know where their parcel is.
+              Flash Courier was built to solve a simple problem: last-mile
+              delivery in Bangladesh is slow, opaque, and unreliable. We set out
+              to change that by building a platform where merchants can ship
+              with confidence, riders can earn fairly, and customers always know
+              where their parcel is.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Every feature we build — real-time tracking, instant payments, automated refunds — exists to remove friction from the delivery experience.
+              Every feature we build — real-time tracking, instant payments,
+              automated refunds — exists to remove friction from the delivery
+              experience.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -117,7 +142,8 @@ export default function AboutUsPage() {
           <div className="text-center space-y-3">
             <h2 className="text-3xl font-bold">What We Stand For</h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              Our values guide every decision — from how we verify riders to how we handle refunds.
+              Our values guide every decision — from how we verify riders to how
+              we handle refunds.
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -141,7 +167,9 @@ export default function AboutUsPage() {
         <div className="mx-auto max-w-3xl space-y-12">
           <div className="text-center space-y-3">
             <h2 className="text-3xl font-bold">Our Journey</h2>
-            <p className="text-muted-foreground">From a small idea to a nationwide logistics platform.</p>
+            <p className="text-muted-foreground">
+              From a small idea to a nationwide logistics platform.
+            </p>
           </div>
           <ol className="relative border-l border-border space-y-8 pl-6">
             {milestones.map(({ year, event }) => (
@@ -149,7 +177,9 @@ export default function AboutUsPage() {
                 <span className="absolute -left-[1.65rem] flex size-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground ring-4 ring-background">
                   {year.slice(2)}
                 </span>
-                <p className="text-xs font-semibold text-primary mb-1">{year}</p>
+                <p className="text-xs font-semibold text-primary mb-1">
+                  {year}
+                </p>
                 <p className="text-sm text-muted-foreground">{event}</p>
               </li>
             ))}
@@ -161,9 +191,12 @@ export default function AboutUsPage() {
       <section className="py-20 px-4 bg-muted/30">
         <div className="mx-auto max-w-5xl space-y-12">
           <div className="text-center space-y-3">
-            <h2 className="text-3xl font-bold">The People Behind Flash Courier</h2>
+            <h2 className="text-3xl font-bold">
+              The People Behind Flash Courier
+            </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
-              A dedicated team working every day to make deliveries faster and more reliable.
+              A dedicated team working every day to make deliveries faster and
+              more reliable.
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-3">

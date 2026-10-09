@@ -33,7 +33,7 @@ const shipmentStatusBadge: Record<ShipmentStatus, string> = {
   ASSIGNED: "bg-indigo-100 text-indigo-800",
   ACCEPTED_BY_RIDER: "bg-cyan-100 text-cyan-800",
   REJECTED_BY_RIDER: "bg-red-100 text-red-800",
-  PICKED_UP: "bg-orange-100 text-orange-800",
+  PICKED_UP: "bg-[#007595]/10 text-[#007595]",
   IN_TRANSIT: "bg-sky-100 text-sky-800",
   OUT_FOR_DELIVERY: "bg-teal-100 text-teal-800",
   DELIVERED: "bg-green-100 text-green-800",
@@ -41,7 +41,10 @@ const shipmentStatusBadge: Record<ShipmentStatus, string> = {
 };
 
 const formatStatus = (s: string) =>
-  s.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+  s
+    .replace(/_/g, " ")
+    .toLowerCase()
+    .replace(/\b\w/g, (c) => c.toUpperCase());
 
 function ActionCell({
   shipment,
@@ -52,7 +55,10 @@ function ActionCell({
   shipment: Shipment;
   onDeliver: (s: Shipment) => void;
   isPending: boolean;
-  onRespond: (id: string, status: "ACCEPTED_BY_RIDER" | "REJECTED_BY_RIDER") => void;
+  onRespond: (
+    id: string,
+    status: "ACCEPTED_BY_RIDER" | "REJECTED_BY_RIDER",
+  ) => void;
 }) {
   const { shipmentStatus } = shipment;
 
@@ -91,7 +97,10 @@ function ActionCell({
   return <span className="text-xs text-muted-foreground">—</span>;
 }
 
-export default function MyDeliveriesTable({ handlePageChange, ...params }: Props) {
+export default function MyDeliveriesTable({
+  handlePageChange,
+  ...params
+}: Props) {
   const { data } = useSuspenseGetMyRiderShipments(params);
   const { mutate: respond, isPending } = useRespondToShipment();
   const [deliverShipment, setDeliverShipment] = useState<Shipment | null>(null);
@@ -114,7 +123,11 @@ export default function MyDeliveriesTable({ handlePageChange, ...params }: Props
             type: "success",
           }),
         onError: (err) =>
-          toast.add({ title: "Failed", description: err.message, type: "error" }),
+          toast.add({
+            title: "Failed",
+            description: err.message,
+            type: "error",
+          }),
       },
     );
   };
@@ -159,7 +172,9 @@ export default function MyDeliveriesTable({ handlePageChange, ...params }: Props
                   </TableCell>
                   <TableCell>
                     <div className="flex flex-col">
-                      <span className="font-medium">{shipment.receiverName}</span>
+                      <span className="font-medium">
+                        {shipment.receiverName}
+                      </span>
                       <span className="text-xs text-muted-foreground">
                         {shipment.receiverContactNumber}
                       </span>

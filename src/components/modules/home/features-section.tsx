@@ -30,7 +30,7 @@ const features = [
 
 export default function FeaturesSection() {
   return (
-    <section className="py-20 px-4 bg-muted/30">
+    <section className="border-y border-[#007595]/10 bg-[#eaf4f6] px-4 py-20">
       <div className="mx-auto max-w-6xl space-y-12">
         <div className="text-center space-y-3">
           <h2 className="text-3xl font-bold">Why Choose Flash Courier?</h2>

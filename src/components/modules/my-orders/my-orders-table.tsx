@@ -28,7 +28,7 @@ const STATUS_BADGE: Record<ShipmentStatus, string> = {
   ASSIGNED: "bg-indigo-100 text-indigo-800",
   ACCEPTED_BY_RIDER: "bg-cyan-100 text-cyan-800",
   REJECTED_BY_RIDER: "bg-red-100 text-red-800",
-  PICKED_UP: "bg-orange-100 text-orange-800",
+  PICKED_UP: "bg-[#007595]/10 text-[#007595]",
   IN_TRANSIT: "bg-sky-100 text-sky-800",
   OUT_FOR_DELIVERY: "bg-teal-100 text-teal-800",
   DELIVERED: "bg-green-100 text-green-800",

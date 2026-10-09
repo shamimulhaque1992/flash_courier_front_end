@@ -12,7 +12,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import TablePagination from "@/components/ui/table-pagination";
-import { useSuspenseGetMyShipments, useRepayShipment, useCancelShipment } from "@/hooks";
+import {
+  useSuspenseGetMyShipments,
+  useRepayShipment,
+  useCancelShipment,
+} from "@/hooks";
 import type { ShipmentParams, ShipmentStatus } from "@/types";
 import { toast } from "@/components/ui/toast";
 
@@ -27,7 +31,7 @@ const shipmentStatusBadge: Record<ShipmentStatus, string> = {
   ASSIGNED: "bg-indigo-100 text-indigo-800",
   ACCEPTED_BY_RIDER: "bg-cyan-100 text-cyan-800",
   REJECTED_BY_RIDER: "bg-red-100 text-red-800",
-  PICKED_UP: "bg-orange-100 text-orange-800",
+  PICKED_UP: "bg-[#007595]/10 text-[#007595]",
   IN_TRANSIT: "bg-sky-100 text-sky-800",
   OUT_FOR_DELIVERY: "bg-teal-100 text-teal-800",
   DELIVERED: "bg-green-100 text-green-800",
@@ -35,7 +39,10 @@ const shipmentStatusBadge: Record<ShipmentStatus, string> = {
 };
 
 const formatStatus = (status: ShipmentStatus) =>
-  status.replace(/_/g, " ").toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+  status
+    .replace(/_/g, " ")
+    .toLowerCase()
+    .replace(/\b\w/g, (c) => c.toUpperCase());
 
 const CANCELLABLE_STATUSES: ShipmentStatus[] = [
   "PENDING_PAYMENT",
@@ -44,7 +51,10 @@ const CANCELLABLE_STATUSES: ShipmentStatus[] = [
   "REJECTED_BY_RIDER",
 ];
 
-export default function MyShipmentsTable({ handlePageChange, ...params }: Props) {
+export default function MyShipmentsTable({
+  handlePageChange,
+  ...params
+}: Props) {
   const { data } = useSuspenseGetMyShipments(params);
   const { mutate: repay, isPending: isRepaying } = useRepayShipment();
   const { mutate: cancel, isPending: isCancelling } = useCancelShipment();
@@ -61,7 +71,11 @@ export default function MyShipmentsTable({ handlePageChange, ...params }: Props)
         }
       },
       onError: (err) => {
-        toast.add({ title: "Repay Failed", description: err.message, type: "error" });
+        toast.add({
+          title: "Repay Failed",
+          description: err.message,
+          type: "error",
+        });
       },
     });
   };
@@ -69,10 +83,18 @@ export default function MyShipmentsTable({ handlePageChange, ...params }: Props)
   const handleCancel = (shipmentId: string) => {
     cancel(shipmentId, {
       onSuccess: () => {
-        toast.add({ title: "Shipment Cancelled", description: "Your shipment has been cancelled.", type: "success" });
+        toast.add({
+          title: "Shipment Cancelled",
+          description: "Your shipment has been cancelled.",
+          type: "success",
+        });
       },
       onError: (err) => {
-        toast.add({ title: "Cancel Failed", description: err.message, type: "error" });
+        toast.add({
+          title: "Cancel Failed",
+          description: err.message,
+          type: "error",
+        });
       },
     });
   };
@@ -118,7 +140,9 @@ export default function MyShipmentsTable({ handlePageChange, ...params }: Props)
                   </TableCell>
                   <TableCell>
                     <div className="flex flex-col">
-                      <span className="font-medium">{shipment.receiverName}</span>
+                      <span className="font-medium">
+                        {shipment.receiverName}
+                      </span>
                       <span className="text-xs text-muted-foreground truncate max-w-[140px]">
                         {shipment.receiverEmail}
                       </span>
@@ -171,7 +195,9 @@ export default function MyShipmentsTable({ handlePageChange, ...params }: Props)
                           Pay
                         </Button>
                       )}
-                      {CANCELLABLE_STATUSES.includes(shipment.shipmentStatus) && (
+                      {CANCELLABLE_STATUSES.includes(
+                        shipment.shipmentStatus,
+                      ) && (
                         <Button
                           size="sm"
                           variant="outline"

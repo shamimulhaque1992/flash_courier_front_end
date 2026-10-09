@@ -5,13 +5,13 @@ import { Store, Bike } from "lucide-react";
 
 export default function CtaSection() {
   return (
-    <section className="py-20 px-4 bg-muted/30">
+    <section className="border-y border-border/70 bg-muted/60 px-4 py-20">
       <div className="mx-auto max-w-4xl space-y-8">
         <div className="text-center space-y-3">
           <h2 className="text-3xl font-bold">Join Flash Courier</h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
-            Whether you run a business or want to earn as a delivery rider,
-            we have a place for you.
+            Whether you run a business or want to earn as a delivery rider, we
+            have a place for you.
           </p>
         </div>
         <div className="grid gap-6 sm:grid-cols-2">

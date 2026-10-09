@@ -1,6 +1,7 @@
-import Logo from "@/assets/svg/Logo";
-import LoginForm from "@/components/form/login-form";
 import Link from "next/link";
+import Logo from "@/assets/svg/Logo";
+import AuthPromoPanel from "@/components/auth/auth-promo-panel";
+import LoginForm from "@/components/form/login-form";
 
 export default function LoginPage() {
   return (
@@ -13,21 +14,15 @@ export default function LoginPage() {
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-center">
-          <div className="w-full max-w-xs">
+          <div className="w-full max-w-md">
             <LoginForm />
           </div>
         </div>
       </div>
-      <div className="relative hidden bg-muted lg:block">
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-500 to-red-500">
-          <div className="text-center text-white px-8">
-            <h2 className="text-4xl font-bold mb-4">Flash Courier</h2>
-            <p className="text-lg opacity-90">
-              Fast, reliable delivery at your fingertips
-            </p>
-          </div>
-        </div>
-      </div>
+      <AuthPromoPanel
+        alt="Flash Courier delivery van and bicycle in the city"
+        src="/login.png"
+      />
     </div>
   );
 }
