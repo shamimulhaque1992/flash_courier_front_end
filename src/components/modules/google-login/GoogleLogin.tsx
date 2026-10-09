@@ -38,7 +38,8 @@ export default function GoogleLoginComponent() {
         onError: (err) => {
           toast.add({
             title: "Google OAuth Failed",
-            description: err.message || "Something went wrong. Please try again",
+            description:
+              err.message || "Something went wrong. Please try again",
             type: "error",
           });
         },
