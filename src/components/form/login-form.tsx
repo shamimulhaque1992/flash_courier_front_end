@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useLogin } from "@/hooks";
 import { loginSchema } from "@/validation";
 import GoogleLoginComponent from "../modules/google-login/GoogleLogin";
+import TesterLoginButtons from "../modules/tester-login/TesterLoginButtons";
 import { Button } from "../ui/button";
 import {
   Field,
@@ -26,6 +27,26 @@ export default function LoginForm() {
 
   const { mutate: login, isPending: loginPending } = useLogin();
 
+  const handleLogin = (credentials: { email: string; password: string }) => {
+    login(credentials, {
+      onSuccess: () => {
+        toast.add({
+          title: "Login Successful",
+          description: "Welcome back",
+          type: "success",
+        });
+        router.push("/");
+      },
+      onError: (err) => {
+        toast.add({
+          title: "Login Failed",
+          description: err.message || "Something went wrong. Please try again",
+          type: "error",
+        });
+      },
+    });
+  };
+
   const form = useForm({
     defaultValues: {
       email: "",
@@ -35,27 +56,7 @@ export default function LoginForm() {
       onSubmit: loginSchema,
     },
     onSubmit: ({ value }) => {
-      login(
-        { email: value.email, password: value.password },
-        {
-          onSuccess: () => {
-            toast.add({
-              title: "Login Successful",
-              description: "Welcome back",
-              type: "success",
-            });
-            router.push("/");
-          },
-          onError: (err) => {
-            toast.add({
-              title: "Login Failed",
-              description:
-                err.message || "Something went wrong. Please try again",
-              type: "error",
-            });
-          },
-        },
-      );
+      handleLogin({ email: value.email, password: value.password });
     },
   });
 
@@ -151,6 +152,7 @@ export default function LoginForm() {
       <FieldSeparator>Or continue with</FieldSeparator>
 
       <GoogleLoginComponent />
+      <TesterLoginButtons onLogin={handleLogin} disabled={loginPending} />
 
       <div className="text-center text-sm text-muted-foreground">
         Don&apos;t have an account?{" "}
