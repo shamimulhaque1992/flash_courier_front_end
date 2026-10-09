@@ -34,13 +34,6 @@ export default function TesterLoginButtons({
   disabled,
   onLogin,
 }: TesterLoginButtonsProps) {
-  if (
-    process.env.NODE_ENV !== "development" ||
-    !testerAccounts.some((account) => account.email && account.password)
-  ) {
-    return null;
-  }
-
   return (
     <div className="grid grid-cols-2 gap-2">
       {testerAccounts.map((account) => (
