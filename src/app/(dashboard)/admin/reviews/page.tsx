@@ -1,13 +1,15 @@
-import ReviewsTable from "@/components/modules/reviews/reviews-table";
+import ReviewsTabs from "@/components/modules/reviews/reviews-tabs";
 
 export default function AdminReviewsPage() {
   return (
-    <div className="space-y-6">
+    <section className="p-5">
       <div>
-        <h1 className="text-2xl font-bold">All Reviews</h1>
-        <p className="text-sm text-muted-foreground">View and manage all customer reviews.</p>
+        <h1 className="text-2xl font-semibold">All Reviews</h1>
+        <p className="text-sm text-muted-foreground mt-1">
+          View and manage all customer reviews.
+        </p>
       </div>
-      <ReviewsTable role="admin" />
-    </div>
+      <ReviewsTabs role="admin" />
+    </section>
   );
 }

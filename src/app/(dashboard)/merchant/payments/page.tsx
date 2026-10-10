@@ -1,13 +1,15 @@
-import PaymentsTable from "@/components/modules/payments/payments-table";
+import PaymentsTabs from "@/components/modules/payments/payments-tabs";
 
 export default function MerchantPaymentsPage() {
   return (
-    <div className="space-y-6">
+    <section className="p-5">
       <div>
-        <h1 className="text-2xl font-bold">My Payments</h1>
-        <p className="text-sm text-muted-foreground">View all payment transactions for your shipments.</p>
+        <h1 className="text-2xl font-semibold">My Payments</h1>
+        <p className="text-sm text-muted-foreground mt-1">
+          View all payment transactions for your shipments.
+        </p>
       </div>
-      <PaymentsTable role="merchant" />
-    </div>
+      <PaymentsTabs role="merchant" />
+    </section>
   );
 }

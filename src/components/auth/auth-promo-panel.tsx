@@ -10,7 +10,7 @@ export default function AuthPromoPanel({ src }: AuthPromoPanelProps) {
       style={{
         backgroundImage: `url(${src})`,
         backgroundSize: "cover",
-        backgroundPosition: "top",
+        backgroundPosition: "top left",
         backgroundRepeat: "no-repeat",
       }}
     />

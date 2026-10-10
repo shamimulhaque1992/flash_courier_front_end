@@ -26,6 +26,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useGetMe, useLogout } from "@/hooks";
 import { LogOut } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { toast } from "../ui/toast";
 
 const sidebarRoutes: Partial<Record<UserRole, SidebarItems>> = {
   SUPER_ADMIN: superAdminRoutes,
@@ -37,6 +39,7 @@ const sidebarRoutes: Partial<Record<UserRole, SidebarItems>> = {
 
 export function DashboardSidebar({ role }: { role: UserRole }) {
   const pathname = usePathname();
+  const queryClient = useQueryClient();
   const router = useRouter();
   const routes: SidebarItems = sidebarRoutes[role] || [];
 
@@ -47,7 +50,15 @@ export function DashboardSidebar({ role }: { role: UserRole }) {
 
   function handleLogout() {
     logout(undefined, {
-      onSuccess: () => router.push("/login"),
+      onSuccess: () => {
+        toast.add({
+          title: "Logged out",
+          description: "Logged out successfully",
+          type: "success",
+        });
+        queryClient.removeQueries({ queryKey: ["user"] });
+        router.push("/");
+      },
     });
   }
 
@@ -89,7 +100,9 @@ export function DashboardSidebar({ role }: { role: UserRole }) {
           </div>
           <div className="min-w-0 flex-1 group-data-[collapsible=icon]:hidden">
             <p className="truncate text-sm font-medium">{user?.name ?? "—"}</p>
-            <p className="truncate text-xs text-muted-foreground">{user?.email ?? "—"}</p>
+            <p className="truncate text-xs text-muted-foreground">
+              {user?.email ?? "—"}
+            </p>
           </div>
           <button
             type="button"

@@ -1,13 +1,15 @@
-import ReviewsTable from "@/components/modules/reviews/reviews-table";
+import ReviewsTabs from "@/components/modules/reviews/reviews-tabs";
 
 export default function RiderReviewsPage() {
   return (
-    <div className="space-y-6">
+    <section className="p-5">
       <div>
-        <h1 className="text-2xl font-bold">My Reviews</h1>
-        <p className="text-sm text-muted-foreground">Reviews customers have left for your deliveries.</p>
+        <h1 className="text-2xl font-semibold">My Reviews</h1>
+        <p className="text-sm text-muted-foreground mt-1">
+          Reviews customers have left for your deliveries.
+        </p>
       </div>
-      <ReviewsTable role="rider" />
-    </div>
+      <ReviewsTabs role="rider" />
+    </section>
   );
 }
