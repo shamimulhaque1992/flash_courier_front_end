@@ -2,7 +2,7 @@
 
 import { format } from "date-fns";
 import { SearchX } from "lucide-react";
-import { Suspense, useState } from "react";
+import { Dispatch, SetStateAction, Suspense, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -35,7 +35,7 @@ function PaymentsTableInner({
 }: {
   params: PaymentParams;
   role: "admin" | "merchant";
-  onPageChange: (p: number) => void;
+  onPageChange: Dispatch<SetStateAction<number>>;
 }) {
   const { data } =
     role === "admin"

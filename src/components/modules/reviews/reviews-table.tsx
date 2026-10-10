@@ -2,7 +2,7 @@
 
 import { format } from "date-fns";
 import { SearchX, Star, Trash2 } from "lucide-react";
-import { Suspense, useState } from "react";
+import { Dispatch, SetStateAction, Suspense, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -55,7 +55,7 @@ function ReviewsTableInner({
 }: {
   params: ReviewParams;
   role: Role;
-  onPageChange: (p: number) => void;
+  onPageChange: Dispatch<SetStateAction<number>>;
 }) {
   const hookMap = {
     admin: useSuspenseGetAllReviews,
