@@ -20,7 +20,7 @@ export interface Payment {
     receiverDistrict: string;
     receiverDivision: string;
     shipmentStatus: string;
-    merchant?: { name: string; email: string } | null;
+    merchant?: { id: string; name: string; email: string; userId: string } | null;
   };
 }
 

@@ -2,7 +2,9 @@
 
 import { format } from "date-fns";
 import { SearchX } from "lucide-react";
+import { useRouter, usePathname } from "next/navigation";
 import type { Dispatch, SetStateAction } from "react";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -30,7 +32,11 @@ interface Props extends PaymentParams {
   handlePageChange: Dispatch<SetStateAction<number>>;
 }
 
+
+
 export default function PaymentsTable({ role, handlePageChange, ...params }: Props) {
+  const router = useRouter();
+  const pathname = usePathname();
   const { data } =
     role === "admin"
       ? useSuspenseGetAllPayments(params)
@@ -38,7 +44,7 @@ export default function PaymentsTable({ role, handlePageChange, ...params }: Pro
 
   const payments = data?.data ?? [];
   const totalPages = data?.meta?.totalPages ?? 0;
-  const colSpan = role === "admin" ? 7 : 6;
+  const colSpan = role === "admin" ? 8 : 7;
 
   return (
     <>
@@ -53,6 +59,7 @@ export default function PaymentsTable({ role, handlePageChange, ...params }: Pro
               <TableHead>Trx ID</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Date</TableHead>
+              <TableHead>Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -110,6 +117,15 @@ export default function PaymentsTable({ role, handlePageChange, ...params }: Pro
                   </TableCell>
                   <TableCell className="text-sm text-muted-foreground">
                     {format(new Date(p.createdAt), "PP")}
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => router.push(`${pathname}?paymentId=${p.id}`)}
+                    >
+                      View Details
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))

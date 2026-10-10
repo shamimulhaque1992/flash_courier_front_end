@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { CheckCircle2, XCircle, AlertCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -74,9 +74,9 @@ function PaymentCallbackContent() {
           </>
         )}
 
-        <Button render={<Link href="/merchant/shipments" />}>
+        <Link href="/merchant/shipments" className={buttonVariants()}>
           Go to My Shipments
-        </Button>
+        </Link>
       </div>
     </div>
   );

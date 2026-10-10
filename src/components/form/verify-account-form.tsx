@@ -2,6 +2,7 @@
 
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   Card,
@@ -33,9 +34,9 @@ export default function VerifyAccountForm({ mode }: { mode: Mode }) {
   const [isInvalid, setIsInvalid] = useState(false);
   const [resendTimer, setResendTimer] = useState(RESEND_COOLDOWN);
 
-  const { mutate: verifyCustomer } = useVerifyAccount();
-  const { mutate: verifyMerchant } = useVerifyMerchantEmail();
-  const { mutate: verifyRider } = useVerifyRiderEmail();
+  const { mutate: verifyCustomer, isPending: isPendingCustomer } = useVerifyAccount();
+  const { mutate: verifyMerchant, isPending: isPendingMerchant } = useVerifyMerchantEmail();
+  const { mutate: verifyRider, isPending: isPendingRider } = useVerifyRiderEmail();
 
   const verifyFn =
     mode === "merchant"
@@ -43,6 +44,8 @@ export default function VerifyAccountForm({ mode }: { mode: Mode }) {
       : mode === "rider"
         ? verifyRider
         : verifyCustomer;
+
+  const isPending = isPendingCustomer || isPendingMerchant || isPendingRider;
 
   const email = searchParams.get("email") || "";
 
@@ -153,7 +156,8 @@ export default function VerifyAccountForm({ mode }: { mode: Mode }) {
       </CardContent>
       <CardFooter>
         <Button disabled={resendTimer > 0}>Resend</Button>
-        <Button type="submit" form="otp-form">
+        <Button type="submit" form="otp-form" disabled={isPending}>
+          {isPending && <Loader2 className="size-4 animate-spin" />}
           Submit
         </Button>
       </CardFooter>
