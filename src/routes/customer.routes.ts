@@ -11,6 +11,7 @@ export const customerRoutes = [
     title: "Orders",
     items: [
       { title: "My Orders", url: `${prefix}/orders` },
+      { title: "My Reviews", url: `${prefix}/reviews` },
       { title: "My Profile", url: `${prefix}/my-profile` },
     ],
   },

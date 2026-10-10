@@ -3,4 +3,7 @@ export * from "./application.api";
 export * from "./shipment.api";
 export * from "./schedule.api";
 export * from "./review.api";
+export * from "./payment.api";
+export * from "./reviews-list.api";
+export * from "./profile.api";
 export * from "./analytics.api";
